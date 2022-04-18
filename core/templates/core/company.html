@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}    
+
+<h2 class="text-center alert alert-danger">Company Registration Panel</h2>
+
+        <div class="row">
+
+
+            <div class="col-sm-4">
+            </div>
+
+
+            <div class="col-sm-4">
+                <h4 class="text-center alert alert-info">Registration Form</h4>
+
+<style type="text/css">
+  .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+</style>
+  
+
+  <div id="load_spinner" style="
+  position: fixed;     
+  z-index: 1001;        
+  background: rgba(0,0,0,0.6);
+  left: 50%;
+  top: 50%;
+  width: 120px;
+  height: 120px;
+  display: none;">
+  
+<div class="loader">
+ </div> 
+
+ <div class="row">
+   <h4>Processing</h2>
+ </div>
+ 
+</div>
+
+
+
+    <form method="POST" enctype="multipart/form-data" class="uform">
+              {% csrf_token %}
+
+
+       <div class="form-group">
+        <div class="row">
+        <div class="col">
+                            <br>First Name<span style="color: red"></span><input type="text" name="firstname" class="form-control"  required="required" id="fname">
+                        </div>
+                      <div class="col">
+                            <br>Last Name<span style="color: red"></span><input type="text" name="middlename" class="form-control" required="" id="lname">
+                        </div>
+                </div>
+              </div>
+
+
+
+        <div class="form-group">
+        <div class="row">
+        <div class="col">
+                            <br>Phone Number<span style="color: red"></span><input type="text" name="firstname" class="form-control" required="required" id="phone_number">
+                        </div>
+                      <div class="col">
+                            <br>Email<span style="color: red"></span><input type="email" name="middlename" class="form-control" required="" id="email">
+                        </div>
+                </div>
+              </div>
+
+
+
+
+                <div class="form-group">
+        <div class="row">
+        <div class="col">
+                            <br>Attachment<span style="color: red"></span>
+
+                    <input type="file" name="file" id="file" required="required">
+
+                        </div>
+                </div>
+              </div>
+
+              <input type="button" name="next" class="btn btn-primary submit" value="Submit" />
+   </form>
+   <br>
+   <br>
+
+
+  <div id="result"></div>    
+
+
+              
+
+            </div>
+
+
+            <div class="col-sm-4"></div>
+
+        </div>
+
+
+{% endblock content %}    

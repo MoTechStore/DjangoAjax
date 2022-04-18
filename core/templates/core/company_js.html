@@ -1,0 +1,64 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	console.log('Hi Moses');
+	$("#result").html('');
+
+
+$('.submit').click(function(){
+	console.log('Button Submit Clicked');
+	var fname = $('.uform #fname').val();
+	var lname = $('.uform #lname').val();
+	var email = $('.uform #email').val();
+	var phone_number = $('.uform #phone_number').val();
+
+	var data = new FormData();
+	data.append("file", $("input[id^='file']")[0].files[0]);
+	data.append("csrfmiddlewaretoken", "{{ csrf_token }}");
+	data.append("fname", fname);
+	data.append("lname", lname);
+	data.append("email", email);
+	data.append("phone_number", phone_number);
+
+
+	console.log(fname);
+	console.log(lname);
+	console.log(email);
+	console.log(phone_number);
+
+	$.ajax({
+		url: "{% url 'file_upload' %}",
+		method: "POST",
+		processData: false,
+		contentType: false,
+		mimeType: "multipart/form-data",
+		data: data,
+		dataType: 'json',
+
+
+
+        beforeSend: function() {
+        $('#load_spinner').show();
+        $(":input").prop("disabled",true); 
+                 },
+
+        complete: function(){
+        $('#load_spinner').hide();
+        $(":input").prop("disabled",false);
+        },
+
+
+		success: function(data){
+			console.log("Data Sent To The Backend")
+			$(".uform")[0].reset();
+			$("#result").html('');
+			$("#result").append('Request Submitted Successfully');
+		}
+	})
+
+
+
+});
+
+
+});
+</script>

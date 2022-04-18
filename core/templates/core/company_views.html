@@ -1,0 +1,31 @@
+def file_upload(request):
+    fname = request.POST.get("fname")
+    lname = request.POST.get("lname")
+    email = request.POST.get("email")
+    phone_number = request.POST.get("phone_number")
+    file = request.FILES.get("file")
+
+    print('First Name is',fname)
+
+    fss = FileSystemStorage()
+    filename = fss.save(file.name, file)
+    url = fss.url(filename)
+    print(file.name)
+
+    a = Book(fname=fname, lname=lname, email=email, phone=phone_number, attachment=file)
+    a.save()
+
+    return JsonResponse({"status":1})
+
+
+
+ Model
+ class Book(models.Model):
+    fname = models.CharField(max_length=200)
+    lname = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    phone = models.CharField(max_length=200)
+    attachment = models.FileField(upload_to='')
+
+    def __str__(self):
+        return self.fname   
